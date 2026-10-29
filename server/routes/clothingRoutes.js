@@ -22,11 +22,12 @@ const protect = (req, res, next) => {
 
 // Create a new clothing listing
 router.post('/', protect, async (req, res) => {
-  const { title, type, brand, size, condition, estimatedValue, location, imageUrl, description } = req.body;
+  const { title, type, brand, size, condition, estimatedValue, location, imageUrl, description, gender } = req.body;
   try {
     const item = new ClothingItem({
       user: req.user.id,
-      title, type, brand, size, condition, estimatedValue, location, imageUrl, description
+      title, type, brand, size, condition, estimatedValue, location, imageUrl, description,
+      gender: gender || 'unisex'
     });
     const createdItem = await item.save();
     res.status(201).json(createdItem);
@@ -38,12 +39,13 @@ router.post('/', protect, async (req, res) => {
 // Get all available clothing listings
 router.get('/', async (req, res) => {
   try {
-    const { location, category, search } = req.query;
+    const { location, category, search, gender } = req.query;
     let query = { status: 'available' };
     
     if (location) query.location = { $regex: location, $options: 'i' };
     if (category) query.type = category;
     if (search) query.title = { $regex: search, $options: 'i' };
+    if (gender && gender !== 'all') query.gender = gender;
 
     const items = await ClothingItem.find(query).populate('user', 'name location');
     res.json(items);

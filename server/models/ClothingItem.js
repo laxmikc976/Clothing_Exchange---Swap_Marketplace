@@ -6,11 +6,13 @@ const clothingItemSchema = new mongoose.Schema({
   type: { type: String, required: true },
   brand: { type: String, required: true },
   size: { type: String, required: true },
+  color: { type: String, default: '' },
   condition: { type: String, required: true },
   estimatedValue: { type: Number, required: true },
   location: { type: String, required: true },
   imageUrl: { type: String, required: true },
   description: { type: String },
+  gender: { type: String, enum: ['men', 'women', 'kids', 'unisex'], default: 'unisex' },
   status: { type: String, enum: ['available', 'swapped', 'hidden'], default: 'available' }
 }, { timestamps: true });
 

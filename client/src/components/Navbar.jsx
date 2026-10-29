@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Shirt, LogOut, User, PlusCircle, MessageCircle, ArrowRightLeft, ShieldAlert } from 'lucide-react';
+import { Shirt, LogOut, User, PlusCircle, MessageCircle, ArrowRightLeft, ShieldAlert, Package } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -22,17 +22,21 @@ const Navbar = () => {
             SwapStyle
           </span>
         </Link>
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-5">
           <Link to="/listings" className="text-[var(--color-text-muted)] hover:text-white font-semibold transition-colors text-sm">Browse</Link>
           {user ? (
             <>
+              <Link to="/orders" className="text-[var(--color-text-muted)] hover:text-white font-semibold flex items-center space-x-1.5 transition-colors text-sm" title="My Orders & Clothes Exchange">
+                <Package size={18} className="text-emerald-400" />
+                <span className="hidden sm:inline">My Orders</span>
+              </Link>
               <Link to="/requests" className="text-[var(--color-text-muted)] hover:text-white font-semibold flex items-center space-x-1 transition-colors text-sm" title="Swap Requests">
                 <ArrowRightLeft size={18} />
               </Link>
               <Link to="/chat" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] font-semibold flex items-center space-x-1 transition-colors text-sm" title="Messages">
                 <MessageCircle size={18} />
               </Link>
-              <Link to="/listings/new" className="text-[var(--color-text-muted)] hover:text-white font-semibold flex items-center space-x-1 transition-colors text-sm">
+              <Link to="/listings/new" className="text-[var(--color-text-muted)] hover:text-white font-semibold flex items-center space-x-1 transition-colors text-sm" title="Add Wardrobe Listing">
                 <PlusCircle size={18} />
               </Link>
               <Link to="/dashboard" className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full transition-colors border border-white/5 group">
@@ -41,10 +45,11 @@ const Navbar = () => {
                 </div>
                 <span className="text-white font-bold text-sm">{user.name}</span>
               </Link>
-              <Link to="/admin" className="text-[var(--color-accent)] hover:text-red-400 font-semibold flex items-center space-x-1 transition-colors text-sm" title="Admin">
+              <Link to="/admin" className="text-[var(--color-accent)] hover:text-red-400 font-semibold flex items-center space-x-1 transition-colors text-sm" title="Admin Portal & Exchange Operations">
                 <ShieldAlert size={18} />
+                <span className="hidden md:inline text-xs font-bold bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">Admin</span>
               </Link>
-              <button onClick={handleLogout} className="text-[var(--color-text-muted)] hover:text-red-400 flex items-center transition-colors">
+              <button onClick={handleLogout} className="text-[var(--color-text-muted)] hover:text-red-400 flex items-center transition-colors" title="Logout">
                 <LogOut size={18} />
               </button>
             </>

@@ -9,6 +9,7 @@ const AddListing = () => {
   const [formData, setFormData] = useState({
     title: '',
     type: 'tops',
+    gender: 'unisex',
     brand: '',
     size: '',
     condition: 'good',
@@ -55,6 +56,16 @@ const AddListing = () => {
                 <option value="outerwear">Outerwear</option>
                 <option value="accessories">Accessories</option>
                 <option value="shoes">Shoes</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-white mb-2">For</label>
+              <select name="gender" value={formData.gender} onChange={handleChange} className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-[var(--color-primary)] text-white transition-all">
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+                <option value="kids">Kids</option>
+                <option value="unisex">Unisex</option>
               </select>
             </div>
 
